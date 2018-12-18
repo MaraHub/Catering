@@ -64,7 +64,7 @@ var Navbar = (function() {
 		'hidden.bs.collapse': function() {
 			var scrollTop = $window.scrollTop();
 
-			if (scrollTop == 0) { 
+			if (scrollTop == 0) {
 				makeNavbarLight();
 			}
 		}
@@ -87,7 +87,7 @@ var Menu = (function() {
 
 	var $menu = 		$('.section_menu__grid');
 	var $menuNav = 		$('.section_menu__nav');
-	var menuItem = 		'.section_menu__grid__item';
+	var $menuItem = 		$('.section_menu__grid__item');
 
 	// Methods
 	// =======
@@ -98,7 +98,7 @@ var Menu = (function() {
 			var menuId = $this.attr('id');
 			var menuDefault = $menuNav.find('li.active > a[href="#' + menuId + '"]').data('filter');
 			var grid = $this.isotope({
-				itemSelector: menuItem,
+				//itemSelector: menuItem,
 				filter: menuDefault
 			});
 
@@ -154,6 +154,7 @@ var Events = (function() {
 	var $eventsItem = 	$('.section_events__item');
 	var $eventsItemSm = $('.section_events__item__content_sm');
 	var $eventsItemLg = $('.section_events__item__content_lg');
+	var $eventsmenuitem = $('.section_menu__grid__item');
 
 	// Methods
 	// ==================
@@ -169,6 +170,16 @@ var Events = (function() {
 	$eventsItemSm.on('click', function() {
 		toggleItem( $(this) );
 	});
+
+	$eventsmenuitem.on('click', function() {
+toggleItem( $(this) );
+	});
+
+	// $eventsmenuitem.on('click', function() {
+	// 	$( this ).fadeTo( "slow", 0.33 );
+	// });
+
+
 
 })();
 
@@ -241,13 +252,13 @@ var Newsletter = (function() {
 
 				if (data.result != "success") {
 					var msg = data.msg;
-						
+
 					$(document).trigger('touche.alert.show', ['danger', msg]);
 				} else {
 
 					// Show a confirmation
 					$(document).trigger('touche.alert.show', ['success', data.msg]);
-					
+
 					// Reset a form
 					$form[0].reset();
 				}
@@ -375,11 +386,11 @@ var GoogleMap = (function() {
 /*** Current Date ***/
 
 var CurrentDate = (function() {
-	
+
 	// Variables
 	// =========
 
-	var $dateContainer = $('#js-current-year');	
+	var $dateContainer = $('#js-current-year');
 
 	// Methods
 	// =======

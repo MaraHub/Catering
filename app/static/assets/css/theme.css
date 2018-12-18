@@ -11832,6 +11832,13 @@ input[type='time'].form-control-sm
 
     border-bottom: 1px solid #f0f0f0;
 }
+.section_menu__item_selected
+{
+    padding: 1rem 0;
+    font-weight: bold;
+    border-bottom: 5px solid #f5a637;
+}
+
 .section_menu__item__img
 {
     position: relative;

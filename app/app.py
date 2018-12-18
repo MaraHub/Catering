@@ -1,5 +1,15 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request,jsonify
+import json
 app = Flask(__name__)
+
+
+def array(list):
+    string = ""
+    for x in list:
+        string+= x
+    return string
+
+
 
 @app.route('/')
 def hello_world():
@@ -16,6 +26,12 @@ def menu():
                                                 'Tzatzikara',
                                                 'Makaronia',
                                                 'Rizoto'})
+
+@app.route('/receiver',methods=['POST','GET'])
+def worker():
+    #data = json.loads(request.form['cars'])
+    return 'ok'
+
 
 ## Run the App
 if __name__ == '__main__':

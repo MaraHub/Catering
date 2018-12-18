@@ -12,7 +12,7 @@
 	<meta name="msapplication-config" content="static/assets/ico/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 
-	<title>Touché - Café & Restaurant Template</title>
+	<title>Menu</title>
 
 	<!-- CSS Plugins -->
 	<link rel="stylesheet" href="static/assets/plugins/font-awesome/css/font-awesome.min.css">
@@ -27,10 +27,17 @@
   </head>
   <body>
 
+
+
+
 	<!-- NAVBAR
 	================================================== -->
+
+
 	<nav class="navbar navbar-light navbar-expand-lg fixed-top">
-		<div class="container">
+
+
+    <div class="container">
 
 			<!-- Navbar: Brand -->
 			<a class="navbar-brand navbar-brand_2 d-lg-none" href="index.html">Touché</a>
@@ -87,14 +94,15 @@
 
 	<!-- HEADER
 	================================================== -->
-	<section class="section section_header" data-parallax="scroll" data-image-src="static/assets/img/25.jpg">
+
+  <section class="section section_header" data-parallax="scroll" data-image-src="static/assets/img/25.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col">
 
 					<!-- Heading -->
 					<h1 class="section__heading section_header__heading text-center">
-						Menu: Standard
+						Menu Για τη Βραδιά Τάδε
 					</h1>
 
 				</div>
@@ -111,11 +119,11 @@
 
 					<!-- Heading -->
 					<h2 class="section__heading text-center">
-						Browse by categories
+						Επιλέξτε το αγαπημένο σας πιάτο
 					</h2>
 					<p class="section__subheading text-center">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Ratione numquam eos perferendis itaque hic unde, ad, laudantium minima.
+						Επιλέξτε για κάθε διαφορετική κατηγορία,
+            το πιάτο που θα θέλατε να απολαύσετε στην εκδήλωση
 					</p>
 
 				</div>
@@ -150,15 +158,15 @@
         {% for fagito in kyriws %}
         <div class="col-md-6 section_menu__grid__item mains">
           <div class="section_menu__item">
-            <div class="row">
+            <div class="row" id="marios">
               <div class="col-3 align-self-center">
                 <div class="section_menu__item__img">
                   <img src="static/assets/img/26.jpg" alt="...">
                 </div>
               </div>
               <div class="col-7">
-                <h4>
-                <a href="#menu_images">  {{fagito}} </a>
+                <h4 id="piato">
+                {{fagito}}
                 </h4>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, obcaecati! Sapiente laudantium.
@@ -175,6 +183,12 @@
 
         {% endfor %}
 
+</div>
+<br>
+<div class="text-center">
+  <a  href =  "{{url_for('main')}}" class="btn btn-primary text-black" id="submit_menu_guest">
+  Υποβολή
+  </a>
 </div>
 		</div> <!-- / .container -->
 	</section>
