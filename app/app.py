@@ -1,7 +1,7 @@
-from flask import Flask,render_template,request,jsonify
+from flask import Flask,render_template,request,jsonify,redirect, url_for
 import json
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy import and_
 app = Flask(__name__)
 
 
@@ -25,6 +25,17 @@ class MenuVote(db.Model):
         self.item = item
 
 
+class MenuAvailable(db.Model):
+    __tablename__ = 'availableMenu'
+    event_code = db.Column('event_code',db.Integer,primary_key=True)
+    submenu = db.Column('submenu',db.Unicode,primary_key=True)
+    item = db.Column('item',db.Unicode,primary_key=True)
+
+    def __init__(self,event_code,voter,submenu,item):
+        self.event_code = event_code
+        self.submenu = submenu
+        self.item = item
+
 
 def array(list):
     string = ""
@@ -41,29 +52,75 @@ def array(list):
 
 @app.route('/mainpage')
 def main():
+    #print("---------------------------------------------------------------------------------")
+    #print("---------------------------------------------------------------------------------")
+    #return 'hi there'
     return render_template('index.html',kyriws = ['Patatosalata','Gemista','Tzatzikara'])
 
-@app.route('/menu/<voter>/<event_code>',methods=['GET','POST'])
-def menu(voter,event_code):
+@app.route('/menu/',methods=['GET','POST'])
+def menu():
+    voter = request.args.get('reservation__form__name')
+    code = request.args.get('reservation__form__phone')
+    entre = db.session.query(MenuAvailable.item).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='entre')).all()
+    kyriws = db.session.query(MenuAvailable.item).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='main')).all()
+    desserts = db.session.query(MenuAvailable.item).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='dessert')).all()
+    drinks = db.session.query(MenuAvailable.item).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='drinks')).all()
+    entre = [str(item).replace("'","").replace("(","").replace(")","").replace(",","") for item in entre]
+    kyriws = [str(item).replace("'","").replace("(","").replace(")","").replace(",","") for item in kyriws]
+    desserts = [str(item).replace("'","").replace("(","").replace(")","").replace(",","") for item in desserts]
+    drinks = [str(item).replace("'","").replace("(","").replace(")","").replace(",","") for item in drinks]
 
-    return render_template('menu.html',kyriws = {'Patatosalata',
-                                                'Gemista',
-                                                'Tzatzikara',
-                                                'Makaronia',
-                                                'Rizoto'})
+    #print(type(list_[0]))
+
+    return render_template('menu.html',entre = entre,kyriws=kyriws,desserts=desserts,drinks=drinks)
+
+@app.route('/event_login',methods=['POST','GET'])
+def event_login():
+
+    if request.method=='GET':
+        print("hello frrm GET")
+        voter = request.args.get['reservation__form__name']
+        print(str(voter))
+        code = request.args.get['reservation__form__phone']
+
+        return redirect(url_for('menu',reservation__form__name=voter,
+                                        reservation__form__phone=code,
+                                        reservation__form__email = 'test@email.com'
+                                        ))
+
+
 
 @app.route('/receiver',methods=['POST','GET'])
 def receiver():
     if request.method=='POST':
         print("hello from Receiver")
-        food = json.loads(request.form['food'])
+        entree = json.loads(request.form['entree'])
+        kyriws = json.loads(request.form['kyriws'])
+        desserts = json.loads(request.form['desserts'])
+        drinks = json.loads(request.form['drinks'])
         voter = request.form['voter']
         event_code = request.form['event_code']
-        submenu = request.form['submenu']
-        for item in food:
-            new_entry = MenuVote(event_code,voter,submenu,item.strip())
+
+        for item in entree:
+            new_entry = MenuVote(event_code,voter,'entree',item.strip())
             db.session.add(new_entry)
             db.session.commit()
+
+        for item in kyriws:
+            new_entry = MenuVote(event_code,voter,'main',item.strip())
+            db.session.add(new_entry)
+            db.session.commit()
+        for item in desserts:
+            new_entry = MenuVote(event_code,voter,'desserts',item.strip())
+            db.session.add(new_entry)
+            db.session.commit()
+
+        for item in drinks:
+            new_entry = MenuVote(event_code,voter,'drinks',item.strip())
+            db.session.add(new_entry)
+            db.session.commit()
+
+
     return {'status':'OK'}
 
 

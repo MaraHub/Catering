@@ -71,21 +71,28 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
                // alert('button clicked');
                var numselections = $('.section_menu__item_selected').length;
-               var selections = $(".section_menu__item_selected h4").toArray();
-               var test = $('.section_menu__item_selected').serialize();
-               var cars = JSON.stringify(put_to_array(selections));
+               var selections = $(".section_menu__item_selected .desserts").toArray();
+                var entree = $(".section_menu__item_selected .entree").toArray();
+                var kyriws = $(".section_menu__item_selected .kyriws").toArray();
+                var desserts = $(".section_menu__item_selected .desserts").toArray();
+                var drinks = $(".section_menu__item_selected .drinks").toArray();
+               //var test = $('.section_menu__item_selected').serialize();
+               //var cars = JSON.stringify(put_to_array(selections));
                console.log(put_to_array(selections).length);
-               console.log(typeof $(".section_menu__item_selected h4"));
+               //console.log(typeof $(".section_menu__item_selected piato"));
                console.log(selections);
                $.ajax({
 
-                  url: 'receiver',
+                  url: '/receiver',
                   type: 'POST',
                   dataType: 'json',
-                  data:{ 'event_code':getUrlParameter('event_code') ,
-                        'food': JSON.stringify(put_to_array(selections)),
-                        'voter':getUrlParameter('voter'),
-                        'submenu':'salad'
+                  data:{ 'event_code':getUrlParameter('reservation__form__phone') ,
+                          //'food':JSON.stringify(put_to_array(selections)),
+                         'entree': JSON.stringify(put_to_array(entree)),
+                         'kyriws': JSON.stringify(put_to_array(kyriws)),
+                         'desserts': JSON.stringify(put_to_array(desserts)),
+                         'drinks': JSON.stringify(put_to_array(drinks)),
+                        'voter':getUrlParameter('reservation__form__name')
                       },
                   success:function(json)
                                 {

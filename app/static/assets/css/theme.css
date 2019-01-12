@@ -11836,7 +11836,9 @@ input[type='time'].form-control-sm
 {
     padding: 1rem 0;
     font-weight: bold;
-    border-bottom: 5px solid #f5a637;
+    /*border-bottom: 5px solid #f5a637;*/
+    background-color: rgba(224,224,224);
+
 }
 
 .section_menu__item__img
