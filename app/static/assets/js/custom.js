@@ -65,6 +65,22 @@ var getUrlParameter = function getUrlParameter(sParam) {
         } return a;
       }
 
+//Remember here you need to change the below funcion to add names for different courses(starters,mains) to get
+// the da with the ither function ex. name=piato_main kai name=perigrafh_main name=piato_starter kai perigrafh_starter
+
+      $("#add_item_starter").click(function (){
+        var menuitem = '<br><div class="row"><div class="col"><input type="text" class="form-control" name="dish_starter" placeholder="Πιάτο"></div><div class="col"><input type="text" class="form-control" name="desc_starter" placeholder="Περιγραφή Πιάτου"></div></div>';
+          $('#submit_menu_form_starter').append($(menuitem));
+      });
+
+      $("#add_item_main").click(function (){
+        var menuitem = '<br><div class="row"><div class="col"><input type="text" class="form-control" name="dish_main" placeholder="Πιάτο"></div><div class="col"><input type="text" class="form-control" name="desc_main" placeholder="Περιγραφή Πιάτου"></div></div>';
+          $('#submit_menu_form_main').append($(menuitem));
+      });
+
+
+
+
   $(function() {
         $("#submit_menu_guest").click( function()
              {
@@ -93,6 +109,49 @@ var getUrlParameter = function getUrlParameter(sParam) {
                          'desserts': JSON.stringify(put_to_array(desserts)),
                          'drinks': JSON.stringify(put_to_array(drinks)),
                         'voter':getUrlParameter('reservation__form__name')
+                      },
+                  success:function(json)
+                                {
+                                    alert(json.result);  //response from the server given as alert message
+                                }
+                      });
+
+               if (numselections>1){
+                 console.log('Please select less than 2');
+               }
+
+             }
+        );
+  });
+
+
+
+
+
+
+  $(function() {
+        $("#submit_menu_company").click( function()
+             {
+
+               // alert('button clicked');
+
+            //    var entree = $("#submit_menu_form_starter").toArray();
+                 var dish_starter = $('[name="dish_starter"]').serializeArray();
+                 var desc_starter = $('[name="desc_starter"]').serializeArray();
+                 var dish_main = $('[name="dish_main"]').serializeArray();
+                 var desc_main = $('[name="desc_main"]').serializeArray();
+
+
+               $.ajax({
+
+                  url: '/receiver2',
+                  type: 'POST',
+                  dataType: 'json',
+                  data:{ 'dish_starter': JSON.stringify(dish_starter),
+                  'desc_starter': JSON.stringify(desc_starter),
+                  'dish_main': JSON.stringify(dish_main),
+                  'desc_main': JSON.stringify(desc_main)
+
                       },
                   success:function(json)
                                 {

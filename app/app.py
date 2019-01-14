@@ -124,9 +124,29 @@ def receiver():
     return {'status':'OK'}
 
 
-        #new_entry = Example(id_,food)
-        #db.session.add(new_entry)
-        #db.session.commit()
+@app.route('/receiver2',methods=['POST','GET'])
+def receiver2():
+    if request.method=='POST':
+        print("hello from Receiver2")
+        dish_starter = json.loads(request.form['dish_starter'])
+        desc_starter = json.loads(request.form['desc_starter'])
+        # for item in dish_starter:
+        #     newEntry = MenuVote()
+        print(dish_starter)
+        print(desc_starter)
+
+
+
+    return {'status':'OK'}
+
+
+
+@app.route('/submit_menu',methods=['POST','GET'])
+def submit_menu():
+    return render_template('submit_menu.html')
+
+
+
 
 
 ## Run the App

@@ -12232,6 +12232,12 @@ body
 {
     background-color: transparent;
 }
+.section[data-parallax='tt']
+{
+    background-color: #f0f0f0;
+}
+
+
 .section_gray
 {
     background-color: #f0f0f0;
