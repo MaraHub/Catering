@@ -78,6 +78,23 @@ var getUrlParameter = function getUrlParameter(sParam) {
           $('#submit_menu_form_main').append($(menuitem));
       });
 
+  $("#add_item_desserts").click(function (){
+        var menuitem = '<br><div class="row"><div class="col"><input type="text" class="form-control" name="dish_desserts" placeholder="Πιάτο"></div><div class="col"><input type="text" class="form-control" name="desc_desserts" placeholder="Περιγραφή Πιάτου"></div></div>';
+          $('#submit_menu_form_desserts').append($(menuitem));
+      });
+
+  $("#add_item_drinks").click(function (){
+        var menuitem = '<br><div class="row"><div class="col"><input type="text" class="form-control" name="drinks" placeholder="Πιάτο"></div><div class="col"><input type="text" class="form-control" name="desc_drinks" placeholder="Περιγραφή Πιάτου"></div></div>';
+          $('#submit_menu_form_drinks').append($(menuitem));
+      });
+
+
+
+
+
+
+
+
 
 
 
@@ -140,6 +157,12 @@ var getUrlParameter = function getUrlParameter(sParam) {
                  var desc_starter = $('[name="desc_starter"]').serializeArray();
                  var dish_main = $('[name="dish_main"]').serializeArray();
                  var desc_main = $('[name="desc_main"]').serializeArray();
+                 var dish_desserts = $('[name="dish_desserts"]').serializeArray();
+	         var desc_desserts = $('[name="desc_desserts"]').serializeArray();
+	
+                 var drinks = $('[name="drinks"]').serializeArray();
+                  var desc_drinks = $('[name="desc_drinks"]').serializeArray();
+
 
 
                $.ajax({
@@ -150,7 +173,13 @@ var getUrlParameter = function getUrlParameter(sParam) {
                   data:{ 'dish_starter': JSON.stringify(dish_starter),
                   'desc_starter': JSON.stringify(desc_starter),
                   'dish_main': JSON.stringify(dish_main),
-                  'desc_main': JSON.stringify(desc_main)
+                  'desc_main': JSON.stringify(desc_main),
+                  'dish_desserts': JSON.stringify(dish_desserts),
+                  'desc_desserts': JSON.stringify(desc_desserts),
+ 		  'drinks': JSON.stringify(drinks),
+                   'desc_drinks': JSON.stringify(desc_drinks)
+
+                  
 
                       },
                   success:function(json)

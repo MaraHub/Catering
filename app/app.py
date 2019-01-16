@@ -2,6 +2,7 @@ from flask import Flask,render_template,request,jsonify,redirect, url_for
 import json
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
+import random
 app = Flask(__name__)
 
 
@@ -29,12 +30,16 @@ class MenuAvailable(db.Model):
     __tablename__ = 'availableMenu'
     event_code = db.Column('event_code',db.Integer,primary_key=True)
     submenu = db.Column('submenu',db.Unicode,primary_key=True)
-    item = db.Column('item',db.Unicode,primary_key=True)
+    dish = db.Column('dish',db.Unicode,primary_key=True)
+    dish_desc = db.Column('dish_desc',db.Unicode)
+    image_path = db.Column('image_path',db.Unicode)
 
-    def __init__(self,event_code,voter,submenu,item):
+    def __init__(self,event_code,submenu,dish,dish_desc,image_path):
         self.event_code = event_code
         self.submenu = submenu
-        self.item = item
+        self.dish = dish
+        self.dish_desc = dish_desc
+        self.image_path = image_path
 
 
 def array(list):
@@ -130,10 +135,46 @@ def receiver2():
         print("hello from Receiver2")
         dish_starter = json.loads(request.form['dish_starter'])
         desc_starter = json.loads(request.form['desc_starter'])
+        dish_main = json.loads(request.form['dish_main'])
+        desc_main = json.loads(request.form['desc_main'])
+        dish_desserts = json.loads(request.form['dish_desserts'])
+        desc_desserts = json.loads(request.form['desc_desserts'])
+        drinks = json.loads(request.form['drinks'])
+        desc_drinks = json.loads(request.form['desc_drinks'])
+        
+      
+       
         # for item in dish_starter:
         #     newEntry = MenuVote()
         print(dish_starter)
         print(desc_starter)
+        
+        
+        event_code = random.randint(100000,1000000)
+        g=0
+        for dish in dish_starter:
+            new_entry = MenuAvailable(event_code,'starter', dish['value'],desc_starter[g]['value'],'')
+            db.session.add(new_entry)
+            db.session.commit()
+            g+=1
+        g=0
+        for dish in dish_main:
+            new_entry = MenuAvailable(event_code,'main', dish['value'],desc_main[g]['value'],'')
+            db.session.add(new_entry)
+            db.session.commit()
+            g+=1
+        g=0
+        for dish in dish_desserts:
+            new_entry = MenuAvailable(event_code,'desserts', dish['value'],desc_desserts[g]['value'],'')
+            db.session.add(new_entry)
+            db.session.commit()
+            g+=1
+        g=0
+        for dish in drinks:
+            new_entry = MenuAvailable(event_code,'drinks', dish['value'],desc_drinks[g]['value'],'')
+            db.session.add(new_entry)
+            db.session.commit()
+            g+=1
 
 
 
