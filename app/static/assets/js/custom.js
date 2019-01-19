@@ -120,9 +120,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
                   type: 'POST',
                   dataType: 'json',
                   data:{ 'event_code':getUrlParameter('reservation__form__phone') ,
-                          //'food':JSON.stringify(put_to_array(selections)),
-                         'entree': JSON.stringify(put_to_array(entree)),
-                         'kyriws': JSON.stringify(put_to_array(kyriws)),
+                         'starters': JSON.stringify(put_to_array(entree)),
+                         'main': JSON.stringify(put_to_array(kyriws)),
                          'desserts': JSON.stringify(put_to_array(desserts)),
                          'drinks': JSON.stringify(put_to_array(drinks)),
                         'voter':getUrlParameter('reservation__form__name')
@@ -159,7 +158,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
                  var desc_main = $('[name="desc_main"]').serializeArray();
                  var dish_desserts = $('[name="dish_desserts"]').serializeArray();
 	         var desc_desserts = $('[name="desc_desserts"]').serializeArray();
-	
+
                  var drinks = $('[name="drinks"]').serializeArray();
                   var desc_drinks = $('[name="desc_drinks"]').serializeArray();
 
@@ -176,17 +175,22 @@ var getUrlParameter = function getUrlParameter(sParam) {
                   'desc_main': JSON.stringify(desc_main),
                   'dish_desserts': JSON.stringify(dish_desserts),
                   'desc_desserts': JSON.stringify(desc_desserts),
- 		  'drinks': JSON.stringify(drinks),
+ 		               'drinks': JSON.stringify(drinks),
                    'desc_drinks': JSON.stringify(desc_drinks)
 
-                  
+
 
                       },
-                  success:function(json)
+                      //This is where you say to the funciton to redirect to page
+                  success:function(response)
                                 {
-                                    alert(json.result);  //response from the server given as alert message
+                                  if (response.redirect) {
+                                    window.location.href = response.redirect;
                                 }
+                              }
                       });
+
+
 
                if (numselections>1){
                  console.log('Please select less than 2');
