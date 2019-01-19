@@ -137,7 +137,7 @@
 					<nav class="section_menu__nav">
 						<ul>
 							<li class="active">
-								<a href="#menu_images" data-filter=".mains">Entree</a>
+								<a href="#menu_images" data-filter=".mains">Ορεκτικα</a>
 							</li>
 							<li>
 								<a href="#menu_images" data-filter=".lunch">Κυριως</a>
@@ -157,7 +157,7 @@
 
 <!--  To Section me ta Entree einai EDW Arxh-->
 			<div class="row section_menu__grid" id="menu_images">
-        {% for fagito in entre %}
+        {% for fagito in starter  %}
         <div class="col-md-6 section_menu__grid__item mains">
           <div class="section_menu__item">
             <div class="row" id="marios">
@@ -171,8 +171,8 @@
                 {{fagito}}
                 </h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, obcaecati! Sapiente laudantium.
-                </p>
+{{starter_desc[loop.index0]}}                  
+               </p>
               </div>
               <!-- <div class="col-2">
                 <div class="section_menu__item__price text-center">
@@ -190,7 +190,7 @@
 
 <!--  To Section me ta Kyriws einai EDW Arxh-->
 <div class="row section_menu__grid" id="menu_images">
-  {% for fagito in kyriws %}
+  {% for fagito in main %}
   <div class="col-md-6 section_menu__grid__item lunch">
     <div class="section_menu__item">
       <div class="row" id="marios">
@@ -204,8 +204,8 @@
           {{fagito}}
           </h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, obcaecati! Sapiente laudantium.
-          </p>
+           {{main_desc[loop.index0]}}
+         </p>
         </div>
         <!-- <div class="col-2">
           <div class="section_menu__item__price text-center">
@@ -240,8 +240,8 @@
           {{fagito}}
           </h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, obcaecati! Sapiente laudantium.
-          </p>
+	{{desserts_desc[loop.index0]}}        
+            </p>
         </div>
         <!-- <div class="col-2">
           <div class="section_menu__item__price text-center">
@@ -274,8 +274,8 @@
           {{fagito}}
           </h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, obcaecati! Sapiente laudantium.
-          </p>
+           {{drinks_desc[loop.index0]}}
+         </p>
         </div>
         <!-- <div class="col-2">
           <div class="section_menu__item__price text-center">
