@@ -62,22 +62,33 @@ def main():
     #return 'hi there'
     return render_template('index.html',kyriws = ['Patatosalata','Gemista','Tzatzikara'])
 
+
+def clean_text(str_):
+    return str_.replace("'","").replace("(","").replace(")","").replace(",","")
+
+
 @app.route('/menu/',methods=['GET','POST'])
 def menu():
     voter = request.args.get('reservation__form__name')
     code = request.args.get('reservation__form__phone')
-    entre = db.session.query(MenuAvailable.item).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='entre')).all()
-    kyriws = db.session.query(MenuAvailable.item).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='main')).all()
-    desserts = db.session.query(MenuAvailable.item).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='dessert')).all()
-    drinks = db.session.query(MenuAvailable.item).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='drinks')).all()
-    entre = [str(item).replace("'","").replace("(","").replace(")","").replace(",","") for item in entre]
-    kyriws = [str(item).replace("'","").replace("(","").replace(")","").replace(",","") for item in kyriws]
-    desserts = [str(item).replace("'","").replace("(","").replace(")","").replace(",","") for item in desserts]
-    drinks = [str(item).replace("'","").replace("(","").replace(")","").replace(",","") for item in drinks]
 
-    #print(type(list_[0]))
+    starter = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='starter')).all()]
+    starter_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='starter')).all()]
+ 
+    main = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='main')).all()]
+    main_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='main')).all()]
 
-    return render_template('menu.html',entre = entre,kyriws=kyriws,desserts=desserts,drinks=drinks)
+    desserts = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='desserts')).all()]
+    desserts_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='desserts')).all()]
+
+    drinks = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='drinks')).all()]
+    drinks_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='drinks')).all()]
+
+
+    return render_template('menu.html',starter = starter,starter_desc = starter_desc,
+                                       main=main,main_desc = main_desc,
+                                       desserts=desserts,desserts_desc = desserts_desc,
+                                       drinks=drinks,drinks_desc=drinks_desc)
 
 @app.route('/event_login',methods=['POST','GET'])
 def event_login():
