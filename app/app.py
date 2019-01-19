@@ -1,10 +1,11 @@
-from flask import Flask,render_template,request,jsonify,redirect, url_for
+from flask import Flask,render_template,request,jsonify,redirect, url_for,session
 import json
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
 import random
+import os
 app = Flask(__name__)
-
+app.secret_key = os.urandom(24)
 
 ## Database Initializatrion and stuff
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Aajlm1981#@localhost/catering_db'
@@ -74,7 +75,7 @@ def menu():
 
     starter = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='starter')).all()]
     starter_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='starter')).all()]
- 
+
     main = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='main')).all()]
     main_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='main')).all()]
 
@@ -110,19 +111,19 @@ def event_login():
 def receiver():
     if request.method=='POST':
         print("hello from Receiver")
-        entree = json.loads(request.form['entree'])
-        kyriws = json.loads(request.form['kyriws'])
+        starters = json.loads(request.form['starters'])
+        main = json.loads(request.form['main'])
         desserts = json.loads(request.form['desserts'])
         drinks = json.loads(request.form['drinks'])
         voter = request.form['voter']
         event_code = request.form['event_code']
 
-        for item in entree:
-            new_entry = MenuVote(event_code,voter,'entree',item.strip())
+        for item in starters:
+            new_entry = MenuVote(event_code,voter,'starters',item.strip())
             db.session.add(new_entry)
             db.session.commit()
 
-        for item in kyriws:
+        for item in main:
             new_entry = MenuVote(event_code,voter,'main',item.strip())
             db.session.add(new_entry)
             db.session.commit()
@@ -144,6 +145,7 @@ def receiver():
 def receiver2():
     if request.method=='POST':
         print("hello from Receiver2")
+
         dish_starter = json.loads(request.form['dish_starter'])
         desc_starter = json.loads(request.form['desc_starter'])
         dish_main = json.loads(request.form['dish_main'])
@@ -152,15 +154,15 @@ def receiver2():
         desc_desserts = json.loads(request.form['desc_desserts'])
         drinks = json.loads(request.form['drinks'])
         desc_drinks = json.loads(request.form['desc_drinks'])
-        
-      
-       
+
+
+
         # for item in dish_starter:
         #     newEntry = MenuVote()
         print(dish_starter)
         print(desc_starter)
-        
-        
+
+
         event_code = random.randint(100000,1000000)
         g=0
         for dish in dish_starter:
@@ -189,15 +191,44 @@ def receiver2():
 
 
 
-    return {'status':'OK'}
+        session['evnt_cd'] = event_code
+        return jsonify(dict(redirect=url_for('submit_menu_confirmation')))
+        #redirect(url_for('submit_menu_confirmation'))
 
 
 
-@app.route('/submit_menu',methods=['POST','GET'])
+
+@app.route('/submit_menu')
 def submit_menu():
     return render_template('submit_menu.html')
 
+@app.route('/submit_menu_confirmation')
+def submit_menu_confirmation():
+    print('hello from confirmation')
+    code = session.get('evnt_cd',None)
 
+    starter = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='starter')).all()]
+    starter_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='starter')).all()]
+
+    main = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='main')).all()]
+    main_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='main')).all()]
+
+    desserts = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='desserts')).all()]
+    desserts_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='desserts')).all()]
+
+    drinks = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='drinks')).all()]
+    drinks_desc = [clean_text(str(item)) for item in db.session.query(MenuAvailable.dish_desc).filter(and_(MenuAvailable.event_code == code,MenuAvailable.submenu=='drinks')).all()]
+
+
+
+    return render_template('sbmt_menu_cnfrm_page.html',event_code=code,starter = starter,starter_desc = starter_desc,
+                                       main=main,main_desc = main_desc,
+                                       desserts=desserts,desserts_desc = desserts_desc,
+                                       drinks=drinks,drinks_desc=drinks_desc)
+
+@app.route('/display_event_code')
+def display_event_code():
+    return render_template('display_event_code.html',event_code=session.get('evnt_cd'))
 
 
 

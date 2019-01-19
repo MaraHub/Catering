@@ -2,25 +2,26 @@
 CREATE DATABASE catering_db;
 
 USE catering_db;
-drop table menuvote;
 
-CREATE TABLE test_data (
-  recipe_id INT NOT NULL,
-  recipe_name VARCHAR(30) NOT NULL,
-  PRIMARY KEY (recipe_id)
-);
+show tables;
 
-INSERT INTO test_data 
-    (recipe_id, recipe_name) 
-VALUES 
-    (1,"Tacos"),
-    (2,"Tomato Soup"),
-    (3,"Grilled Cheese");
-    
-    
-select item from menuvote where event_code = 15465;
 
-select * from menuvote;
+drop table availableMenu;
+
+
+CREATE TABLE availableMenu (
+  event_code INT NOT NULL,
+  submenu VARCHAR(30) NOT NULL,
+  dish VARCHAR(200) NOT NULL,
+  dish_desc VARCHAR(200) NOT NULL,
+  image_path VARCHAR(200)   ,
+  PRIMARY KEY (event_code,submenu,dish)
+  );
+  
+  
+
+select * from availableMenu;
+
 
 
 CREATE TABLE menuvote (
@@ -32,12 +33,6 @@ CREATE TABLE menuvote (
 );
 
 
-CREATE TABLE availableMenu (
-  event_code INT NOT NULL,
-  submenu VARCHAR(30) NOT NULL,
-  item VARCHAR(30) NOT NULL,
-  PRIMARY KEY (event_code,submenu,item)
-  );
   
   
   CREATE TABLE SubmitedMenu (
