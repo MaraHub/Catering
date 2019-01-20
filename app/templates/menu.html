@@ -32,18 +32,14 @@
 
 	<!-- NAVBAR
 	================================================== -->
-
-
-	<nav class="navbar navbar-light navbar-expand-lg fixed-top">
-
-
-    <div class="container">
+  <nav class="navbar navbar-light navbar-expand-lg fixed-top">
+		<div class="container">
 
 			<!-- Navbar: Brand -->
-			<a class="navbar-brand navbar-brand_2 d-lg-none" href="index.html">Touché</a>
+			<a class="navbar-brand d-lg-none" href="index.html">Save Food</a>
 
 			<!-- Navbar: Toggler -->
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
@@ -53,37 +49,37 @@
 				<!-- Navbar navigation: Left -->
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="about-us.html">About Us</a>
+						<a class="nav-link" href="about-us.html">σχετικα με μας</a>
 					</li>
-					<li class="nav-item dropdown active">
+					<!-- <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="http://example.com" id="nav-item__menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Menu
 						</a>
 						<div class="dropdown-menu" aria-labelledby="nav-item__menu">
-							<a class="dropdown-item active" href="menu.html">Menu: Standard</a>
-							<a class="dropdown-item" href="menu_no-images.html">Menu: No Images</a>
+							<a class="dropdown-item" href="menu.html">Menu: Ena</a>
+							<a class="dropdown-item" href="menu_no-images.html">Menu: Dyo</a>
 						</div>
-					</li>
+					</li> -->
 					<li class="nav-item">
-						<a class="nav-link" href="reservation.html">Reservation</a>
+						<a class="nav-link" href="#section_reservation">κωδικος</a>
 					</li>
 				</ul>
 
-				<!-- Brand name -->
-				<a class="navbar-brand navbar-brand_2 d-none d-lg-flex" href="{{url_for('main')}}">
-					Touché
+				<!-- Navbar: Brand -->
+				<a class="navbar-brand d-none d-lg-flex" href="{{url_for('main')}}">
+					Save Food
 				</a>
 
 				<!-- Navbar navigation: Right -->
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="news-and-events.html">News & Events</a>
+						<a class="nav-link" href="news-and-events.html">νεα</a>
 					</li>
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-link" href="gallery.html">Gallery</a>
-					</li>
+					</li> -->
 					<li class="nav-item">
-						<a class="nav-link" href="contact-us.html">Contact</a>
+						<a class="nav-link" href="contact-us.html">επικοινωνια</a>
 					</li>
 				</ul>
 
@@ -171,7 +167,7 @@
                 {{fagito}}
                 </h4>
                 <p>
-{{starter_desc[loop.index0]}}                  
+{{starter_desc[loop.index0]}}
                </p>
               </div>
               <!-- <div class="col-2">
@@ -240,7 +236,7 @@
           {{fagito}}
           </h4>
           <p>
-	{{desserts_desc[loop.index0]}}        
+	{{desserts_desc[loop.index0]}}
             </p>
         </div>
         <!-- <div class="col-2">
@@ -324,68 +320,69 @@
 
 	<!-- FOOTER
 	================================================== -->
-	<footer class="section section_footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4">
+  <footer class="section section_footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
 
-					<!-- About Us -->
-					<h5 class="section_footer__heading">
-						About Us
-					</h5>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti dolorum, sint corporis nostrum, possimus unde eos vitae eius quasi saepe.
-					</p>
+          <!-- About Us -->
+          <h5 class="section_footer__heading">
+            Σχετικα με τη SaveFood
+          </h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti dolorum, sint corporis nostrum, possimus unde eos vitae eius quasi saepe.
+          </p>
 
-				</div>
-				<div class="col-sm-4">
+        </div>
+        <div class="col-sm-6">
 
-					<!-- Contact info -->
-					<h5 class="section_footer__heading">
-						Contact info
-					</h5>
-					<ul class="section_footer__info">
-						<li>
-							<i class="fa fa-map-marker"></i> 1234 Altschul, New York, NY 10027-0000
-						</li>
-						<li>
-							<i class="fa fa-phone"></i> +1 987 654 3210
-						</li>
-						<li>
-							<i class="fa fa-envelope-o"></i> <a href="mailto:admin@domain.com">admin@domain.com</a>
-						</li>
-					</ul>
+          <!-- Contact info -->
+          <h5 class="section_footer__heading">
+            επικοινωνια
+          </h5>
+          <ul class="section_footer__info">
+            <li>
+              <i class="fa-map-marker"></i>
+            </li>
+            <li>
+              <i class="fa-phone"></i> +210 88457123
+            </li>
+            <li>
+              <i class="fa-envelope-o"></i> <a href="mailto:admin@savefood.com">admin@domain.com</a>
+            </li>
+          </ul>
 
-				</div>
-				<div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
 
-					<!-- Opening hours -->
-					<h5 class="section_footer__heading">
-						Opening hours
-					</h5>
-					<div class="section_footer__open">
-						<div class="section_footer__open__days">Monday - Thursday</div>
-						<div class="section_footer__open__time">10:00 AM - 11:00 PM</div>
-					</div>
-					<div class="section_footer__open">
-						<div class="section_footer__open__days">Friday - Sunday</div>
-						<div class="section_footer__open__time">12:00 AM - 03:00 AM</div>
-					</div>
+          <!-- Opening hours -->
+          <!-- <h5 class="section_footer__heading">
+            Opening hours
+          </h5>
+          <div class="section_footer__open">
+            <div class="section_footer__open__days">Monday - Thursday</div>
+            <div class="section_footer__open__time">10:00 AM - 11:00 PM</div>
+          </div>
+          <div class="section_footer__open">
+            <div class="section_footer__open__days">Friday - Sunday</div>
+            <div class="section_footer__open__time">12:00 AM - 03:00 AM</div>
+          </div> -->
 
-				</div>
-			</div> <!-- / .row -->
-			<div class="row">
-				<div class="col-12">
+        </div>
+      </div> <!-- / .row -->
+      <div class="row">
+        <div class="col-12">
 
-					<!-- Copyright -->
-					<div class="section_footer__copyright">
-						<i class="fa fa-copyright"></i> <span id="js-current-year"></span> Touché. All rights reserved.
-					</div>
+          <!-- Copyright -->
+          <div class="section_footer__copyright">
+            <i class="fa fa-copyright"></i> <span id="js-current-year"></span> SaveFood. All rights reserved.
+          </div>
 
-				</div>
-			</div> <!-- / .row -->
-		</div> <!-- / .container -->
-	</footer>
+        </div>
+      </div> <!-- / .row -->
+    </div> <!-- / .container -->
+  </footer>
+
 
 	<!-- JAVASCRIPT
 	================================================== -->
