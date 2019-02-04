@@ -37,7 +37,7 @@
 		<div class="container">
 
 			<!-- Navbar: Brand -->
-			<a class="navbar-brand d-lg-none" href="index.html">Save Food</a>
+			<a class="navbar-brand d-lg-none" href="{{url_for('main')}}">Dinebeat</a>
 
 			<!-- Navbar: Toggler -->
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@
 				<!-- Navbar navigation: Left -->
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="about-us.html">σχετικα με μας</a>
+						<a class="nav-link" href="{{url_for('main')}}">σχετικα με μας</a>
 					</li>
 					<!-- <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="http://example.com" id="nav-item__menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,7 +68,7 @@
 
 				<!-- Navbar: Brand -->
 				<a class="navbar-brand d-none d-lg-flex" href="{{url_for('main')}}">
-					Save Food
+					Dinebeat
 				</a>
 
 				<!-- Navbar navigation: Right -->
@@ -80,7 +80,7 @@
 						<a class="nav-link" href="gallery.html">Gallery</a>
 					</li> -->
 					<li class="nav-item">
-						<a class="nav-link" href="contact-us.html">επικοινωνια</a>
+						<a class="nav-link" href="{{url_for('main')}}">επικοινωνια</a>
 					</li>
 				</ul>
 
@@ -99,7 +99,7 @@
 
 					<!-- Heading -->
 					<h1 class="section__heading section_header__heading text-center">
-						Φόρμα Εισαγωγής Μενού
+						Καλως ήρθες <br>{{current_user.name}}<br>Φόρμα Εισαγωγής Μενού
 					</h1>
 
 				</div>
@@ -159,9 +159,11 @@
          <div class="col">
            <input type="text" name="desc_starter" class="form-control" placeholder="Περιγραφή Πιάτου">
          </div>
+
+
        </div>
 
-     </form>
+ </form>
 
 <br>
       <!-- Button -->

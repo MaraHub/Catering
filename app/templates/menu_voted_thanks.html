@@ -12,7 +12,7 @@
 	<meta name="msapplication-config" content="/static/assets/ico/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 
-	<title>Εγγραφή</title>
+	<title>Menu</title>
 
 	<!-- CSS Plugins -->
 	<link rel="stylesheet" href="/static/assets/plugins/font-awesome/css/font-awesome.min.css">
@@ -36,7 +36,7 @@
 		<div class="container">
 
 			<!-- Navbar: Brand -->
-			<a class="navbar-brand d-lg-none" href="index.html">Dinebeat</a>
+			<a class="navbar-brand d-lg-none" href="index.html">Save Food</a>
 
 			<!-- Navbar: Toggler -->
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,7 @@
 
 				<!-- Navbar: Brand -->
 				<a class="navbar-brand d-none d-lg-flex" href="{{url_for('main')}}">
-					Dinebeat
+					Save Food
 				</a>
 
 				<!-- Navbar navigation: Right -->
@@ -98,49 +98,46 @@
 
 					<!-- Heading -->
 					<h1 class="section__heading section_header__heading text-center">
-						Παρακαλώ διαλέξτε μια μέθοδο εγγραφής
+						Ευχαριστουμε πολύ για τις επιλογές σας!
+            Σας ευχόμαστε μια υπέροχη βραδιά!
 					</h1>
 
 				</div>
 			</div> <!-- / .row -->
 		</div> <!-- / .container -->
 	</section>
-
-
-
-
-
-<div class="login-form">
-    <form action="/examples/actions/confirmation.php" method="post">
-        <h2 class="text-center">Επιλογές Εγγραφής</h2>
-        <div class="text-center social-btn">
-          <a href="{{google_auth}}" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Εγγραφη με <b>Google</b></a>
-          <a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Εγγραφη με <b>Facebook</b></a>
-          <a href="#" class="btn btn-info btn-block"><i class="fa fa-twitter"></i> Εγγραφη με  <b>Twitter</b></a>
-		     </div>
-		<!-- <div class="or-seperator"><i>or</i></div>
-        <div class="form-group">
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
-            </div>
-        </div>
-		<div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success btn-block login-btn">Sign in</button>
-        </div>
-        <div class="clearfix">
-            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-            <a href="#" class="pull-right text-success">Forgot Password?</a>
-        </div>
-
-    </form>
-    <div class="hint-text small">Don't have an account? <a href="#" class="text-success">Register Now!</a></div> -->
+<br><br><br>
+	<div class="text-center">
+  <a   class="btn btn-primary text-black" id="submit_menu_confirmation" href={{url_for('main')}}>
+  Επιστροφή στην Κεντρικη σελίδα
+  </a>
 </div>
-</body>
+
+
+
+
+
+	<!-- JAVASCRIPT
+	================================================== -->
+
+	<!-- JS Global -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/static/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- JS Plugins -->
+	<script src="/static/assets/plugins/parallax/parallax.min.js"></script>
+	<script src="/static/assets/plugins/isotope/lib/imagesloaded.pkgd.min.js"></script>
+	<script src="/static/assets/plugins/isotope/isotope.pkgd.min.js"></script>
+	<script src="/static/assets/plugins/flickity/flickity.pkgd.min.js"></script>
+	<script src="/static/assets/plugins/lightbox/js/lightbox.min.js"></script>
+	<script src="/static/assets/plugins/reservation/reservation.js"></script>
+	<script src="/static/assets/plugins/alerts/alerts.js"></script>
+
+	<!-- JS Custom -->
+	<!-- build:js static/assets/js/theme.min.js -->
+	<script src="/static/assets/js/theme.js"></script>
+	<!-- endbuild -->
+	<script src="/static/assets/js/custom.js"></script>
+
+  </body>
 </html>

@@ -12,7 +12,7 @@
 	<meta name="msapplication-config" content="static/assets/ico/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 
-	<title>SaveFood Project</title>
+	<title>Dinebeat</title>
 
 	<!-- CSS Plugins -->
 	<link rel="stylesheet" href="static/plugins/font-awesome/css/font-awesome.min.css">
@@ -32,7 +32,7 @@
 
 			<!-- Navbar: Brand -->
       <div class="row">
-			<a class="navbar-brand d-lg-none" href="index.html">Save Food</a>
+			<a class="navbar-brand d-lg-none" href="{{url_for('main')}}">Dinebeat</a>
 </div>
 			<!-- Navbar: Toggler -->
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 				<!-- Navbar navigation: Left -->
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="about-us.html">σχετικα με μας</a>
+						<a class="nav-link" href="{{url_for('main')}}">σχετικα με μας</a>
 					</li>
 					<!-- <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="http://example.com" id="nav-item__menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,7 +63,7 @@
 
 				<!-- Navbar: Brand -->
 				<a class="navbar-brand d-none d-lg-flex" href="{{url_for('main')}}">
-					Save Food
+					Dinebeat
 				</a>
 
 				<!-- Navbar navigation: Right -->
@@ -99,7 +99,7 @@
 							<!-- <span class="text-primary">Café</span> / Restaurant -->
 						</h2>
 						<h1 class="section__heading section_welcome__heading text-center">
-							Save Food
+							Dinebeat
 						</h1>
 						<p class="section__subheading section_welcome__subheading text-center text-muted">
               Μια Πλατφμόρμα που σας επιτρέπει να δώσετε την καλύτερη εμπειρία
@@ -283,18 +283,13 @@
 							<div class="col-md-12">
 
 								<div class="form-group">
-									<label class="sr-only" for="reservation__form__name">Full name</label>
-									<input type="text" class="form-control" id="reservation__form__name" name="reservation__form__name" placeholder="Όνομα">
+									<!-- <label class="sr-only" for="reservation__form__name">Full name</label> -->
+									<input type="text" class="form-control" id="voter_name" name="voter_name" placeholder="Όνομα">
 									<div class="invalid-feedback"></div>
 								</div>
 								<div class="form-group">
-									<label class="sr-only" for="reservation__form__phone">Reservation Code</label>
-									<input type="tel" class="form-control" id="reservation__form__phone" name="reservation__form__phone" placeholder="Κωδικός Κράτησης">
-									<div class="invalid-feedback"></div>
-								</div>
-								<div class="form-group">
-									<label class="sr-only" for="reservation__form__email">E-mail address</label>
-									<input type="email" class="form-control" id="reservation__form__email" name="reservation__form__email" placeholder="E-mail">
+									<!-- <label class="sr-only" for="reservation__form__phone">Reservation Code</label> -->
+									<input type="tel" class="form-control" id="event_code_id" name="event_code_id" placeholder="Κωδικός Κράτησης">
 									<div class="invalid-feedback"></div>
 								</div>
 

@@ -45,7 +45,10 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 //var tech = getUrlParameter('technology');
 
+$("#submit_menu_confirmation_b").click(function(){
 
+  window.history.back();
+});
 
 
 
@@ -103,33 +106,37 @@ var getUrlParameter = function getUrlParameter(sParam) {
              {
 
                // alert('button clicked');
-               var numselections = $('.section_menu__item_selected').length;
+               var numselections = $('.section_menu__item_selected .entree').length;
                var selections = $(".section_menu__item_selected .desserts").toArray();
                 var entree = $(".section_menu__item_selected .entree").toArray();
                 var kyriws = $(".section_menu__item_selected .kyriws").toArray();
                 var desserts = $(".section_menu__item_selected .desserts").toArray();
                 var drinks = $(".section_menu__item_selected .drinks").toArray();
+
                //var test = $('.section_menu__item_selected').serialize();
                //var cars = JSON.stringify(put_to_array(selections));
-               console.log(put_to_array(selections).length);
+               //console.log(put_to_array(selections).length);
                //console.log(typeof $(".section_menu__item_selected piato"));
-               console.log(selections);
+
                $.ajax({
 
-                  url: '/receiver',
+                  url: '/post_menu_voted',
                   type: 'POST',
                   dataType: 'json',
-                  data:{ 'event_code':getUrlParameter('reservation__form__phone') ,
+                  data:{
+                         // 'event_code':getUrlParameter('event_code_id') ,
                          'starters': JSON.stringify(put_to_array(entree)),
                          'main': JSON.stringify(put_to_array(kyriws)),
                          'desserts': JSON.stringify(put_to_array(desserts)),
-                         'drinks': JSON.stringify(put_to_array(drinks)),
-                        'voter':getUrlParameter('reservation__form__name')
+                         'drinks': JSON.stringify(put_to_array(drinks))
+                        // ,'voter':getUrlParameter('voter_name')
                       },
-                  success:function(json)
-                                {
-                                    alert(json.result);  //response from the server given as alert message
-                                }
+                      success:function(response)
+                                    {
+                                      if (response.redirect) {
+                                        window.location.href = response.redirect;
+                                    }
+                                  }
                       });
 
                if (numselections>1){
@@ -157,11 +164,11 @@ var getUrlParameter = function getUrlParameter(sParam) {
                  var dish_main = $('[name="dish_main"]').serializeArray();
                  var desc_main = $('[name="desc_main"]').serializeArray();
                  var dish_desserts = $('[name="dish_desserts"]').serializeArray();
-	         var desc_desserts = $('[name="desc_desserts"]').serializeArray();
-
+	               var desc_desserts = $('[name="desc_desserts"]').serializeArray();
                  var drinks = $('[name="drinks"]').serializeArray();
                   var desc_drinks = $('[name="desc_drinks"]').serializeArray();
 
+                console.log(dish_starter.length);
 
 
                $.ajax({
@@ -192,7 +199,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
 
 
-               if (numselections>1){
+               if (dish_starter.length>1){
                  console.log('Please select less than 2');
                }
 

@@ -32,11 +32,12 @@
 
 	<!-- NAVBAR
 	================================================== -->
+
   <nav class="navbar navbar-light navbar-expand-lg fixed-top">
 		<div class="container">
 
 			<!-- Navbar: Brand -->
-			<a class="navbar-brand d-lg-none" href="index.html">Save Food</a>
+			<a class="navbar-brand d-lg-none" href="{{url_for('main')}}">Save Food</a>
 
 			<!-- Navbar: Toggler -->
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +74,7 @@
 				<!-- Navbar navigation: Right -->
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="{{url_for('main')}}">νεα</a>
+						<a class="nav-link" href="news-and-events.html">νεα</a>
 					</li>
 					<!-- <li class="nav-item">
 						<a class="nav-link" href="gallery.html">Gallery</a>
@@ -98,7 +99,7 @@
 
 					<!-- Heading -->
 					<h1 class="section__heading section_header__heading text-center">
-						Menu Για τη Βραδιά
+						Φόρμα Εισαγωγής Μενού
 					</h1>
 
 				</div>
@@ -109,89 +110,187 @@
 	<!-- MENU
 	================================================== -->
 	<section class="section section_menu section_border_bottom">
-		<div class="container">
+
+    <div class="container">
 			<div class="row">
 				<div class="col">
 
 					<!-- Heading -->
 					<h2 class="section__heading text-center">
-						Επιβεβαίωση του μενού Εισαγωγης
+						Εισάγετε τη λίστα επιλογής των καλεσμένων
 					</h2>
+
+          <h3 class="section__heading text-center">
+            Οδηγίες
+          </h3>
+
 					<p class="section__subheading text-center">
-						Παρακαλούμε ελένξτε τα στοιχεία που εισάγαγατε, και αν είναι όλα
-            σωστα πατείστε ΕΠΙΒΕΒΑΙΩΣΗ
+						Για κάθε ένα από τα παρακάτω  courses (Ορεκτικά,Κυρίως,Επιδόρπια και ποτά)
+            εισάγετε το όνομα του πιάτου και δίπλα από αυτό μια περιγραφή
 					</p>
 
           <p class="section__subheading text-center">
-						Αλλιώς πατείστε ΕΠΙΣΤΡΟΦΗ για να διορθωσετε κάποιο λάθος
-					</p>
+            Για να προσθέσετε μια επιλογή πιάτου πατήστε στο +ΠΙΑΤΟ εικονίδιο
+          </p>
+
+          <p class="section__subheading text-center">
+            Όταν έχετε ολοκληρώσει όλες τις επιλογές, πατείστε το κουμπί υποβολής
+            για αποθηκεύσετε τις επιλογές σας
+          </p>
 
 				</div>
 			</div> <!-- / .row -->
-
-<div class="text-center">
-<h3> Ορεκτικά</h3>
-  </div>
-  {% for item in starter  %}
-  <div class="text-left">
-    <h4>{{item['value']}}</h4>
-    <p> {{starter_desc[loop.index0]['value']}}   </p>
 </div>
-
-        {% endfor %}
-
-
-
-        <div class="text-center">
-        <h3> Κυρίως</h3>
-          </div>
-          {% for item in main  %}
-          <div class="text-left">
-            <h4>{{item['value']}}</h4>
-            <p> {{main_desc[loop.index0]['value']}}   </p>
-        </div>
-
-                {% endfor %}
+</section>
+<section class="section ">
 
 
-                <div class="text-center">
-                <h3> Επιδόρπια</h3>
-                  </div>
-                  {% for item in desserts  %}
-                  <div class="text-left">
-                    <h4>{{item['value']}}</h4>
-                    <p> {{desserts_desc[loop.index0]['value']}}   </p>
-                </div>
+     <!-- H eisagwgh -->
 
-                        {% endfor %}
+     <h2 class="section__heading text-left">
+       Εισάγετε τα Ορεκτικά
+     </h2>
 
-                        <div class="text-center">
-                        <h3>  Ποτά</h3>
-                          </div>
-                          {% for item in drinks  %}
-                          <div class="text-left">
-                            <h4>{{item['value']}}</h4>
-                            <p> {{drinks_desc[loop.index0]['value']}}   </p>
-                        </div>
+     <form id='submit_menu_form_starter'>
+       {% for item in starter  %}
+     <div class="row">
+       <div class="col">
+         <input type="text" name = "dish_starter" class="form-control" value="{{item['value']}}">
+       </div>
+       <div class="col">
+         <input type="text" name = "desc_starter" class="form-control" value="{{starter_desc[loop.index0]['value']}}">
+       </div>
+     </div>
+     {% endfor %}
 
-                                {% endfor %}
+     </form>
 
 <br>
-<!-- Button -->
-<div class="text-center">
-  <a   class="btn btn-primary text-black" id="submit_menu_confirmation" href="{{url_for('change_input')}}" >
-  Επιστροφη
-  </a>
-</div>
-<br><br>
-<div class="text-center">
-  <a   class="btn btn-primary text-black" id="submit_menu_confirmation" href={{url_for('display_event_code')}}>
-  Επιβεβαιωση
-  </a>
+      <!-- Button -->
+    <div class="text-center">
+      <a   class="btn btn-primary text-black" id="add_item_starter">
+      + Πιατο
+      </a>
+</section>
+
+
+
+
+<section class="section section_contents bg-light">
+
+
+      <h2 class="section__heading text-left">
+        Εισάγετε τα Κυρίως
+      </h2>
+     <form id='submit_menu_form_main'>
+         {% for item in main  %}
+       <div class="row">
+         <div class="col">
+           <input type="text" name = "dish_main" class="form-control" value="{{item['value']}}">
+         </div>
+         <div class="col">
+           <input type="text" name = "desc_main" class="form-control" value="{{main_desc[loop.index0]['value']}}">
+         </div>
+       </div>
+       {% endfor %}
+</form>
+
+<br>
+     <!-- Button -->
+    <div class="text-center">
+      <a   class="btn btn-primary text-black" id="add_item_main">
+      + Πιατο
+      </a>
 </div>
 
-		</div> <!-- / .container -->
+
+
+</section>
+
+
+
+<section class="section ">
+
+
+     <!-- H eisagwgh -->
+
+     <h2 class="section__heading text-left">
+       Εισάγετε τα Επιδόρπια
+     </h2>
+
+     <form id='submit_menu_form_desserts'>
+       {% for item in desserts  %}
+     <div class="row">
+       <div class="col">
+         <input type="text" name = "dish_desserts" class="form-control" value="{{item['value']}}">
+       </div>
+       <div class="col">
+         <input type="text" name = "desc_desserts" class="form-control" value="{{desserts_desc[loop.index0]['value']}}">
+       </div>
+     </div>
+     {% endfor %}
+
+     </form>
+
+<br>
+      <!-- Button -->
+    <div class="text-center">
+      <a   class="btn btn-primary text-black" id="add_item_desserts">
+      + Πιατο
+      </a>
+</div>
+</section>
+
+
+
+<section class="section section_contents bg-light">
+
+
+      <h2 class="section__heading text-left">
+        Εισάγετε τα Ποτά
+      </h2>
+     <form id='submit_menu_form_drinks'>
+       {% for item in drinks  %}
+     <div class="row">
+       <div class="col">
+         <input type="text" name = "drinks" class="form-control" value="{{item['value']}}">
+       </div>
+       <div class="col">
+         <input type="text" name = "desc_drinks" class="form-control" value="{{drinks_desc[loop.index0]['value']}}">
+       </div>
+     </div>
+     {% endfor %}
+
+     </form>
+
+<br>
+      <!-- Button -->
+    <div class="text-center">
+      <a   class="btn btn-primary text-black" id="add_item_drinks">
+      + Πιατο
+      </a>
+    </div>
+
 	</section>
+
+
+<br>
+<br>
+    <div class="text-center">
+      <a   class="btn btn-primary text-black" id="submit_menu_company">
+      Υποβολή
+      </a>
+    </div>
+
+<!-- <div class="text-center">
+  <a   class="btn btn-primary text-black" id="delete_item">
+  - Πιάτο
+  </a>
+</div> -->
+
+		<!-- </div> -->
+     <!-- / .container -->
+
 
 
 	<!-- FOOTER
