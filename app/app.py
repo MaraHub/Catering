@@ -6,6 +6,7 @@ from flask import Flask,render_template,request,jsonify,redirect, url_for,sessio
 import json
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
+
 import random
 import os
 from werkzeug.utils import secure_filename
@@ -19,6 +20,10 @@ from models import db,MenuAvailable,User,MenuVote
 from help_functions import clean_text
 ############################## App ##########################
 #################################################################
+
+
+
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
